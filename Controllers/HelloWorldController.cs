@@ -12,9 +12,9 @@ namespace AspNetMvcMicrosoftDocs.Controllers
         // 
         // GET: /HelloWorld/
         //https://localhost:5001/HelloWorld
-        public string Index()
+        public IActionResult Index()
         {
-            return "This is my default action...";
+            return View();
         }
 
         //// 
@@ -39,9 +39,17 @@ namespace AspNetMvcMicrosoftDocs.Controllers
         //// Requires using System.Text.Encodings.Web;
         ///
         //https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick
-        public string Welcome(string name, int ID = 1)
+        //public string Welcome(string name, int ID = 1)
+        //{
+        //    return HtmlEncoder.Default.Encode($"Hello {name}, ID: {ID}");
+        //}
+
+        public IActionResult Welcome(string name, int numTimes = 1)
         {
-            return HtmlEncoder.Default.Encode($"Hello {name}, ID: {ID}");
+            ViewData["Message"] = "Hello " + name;
+            ViewData["NumTimes"] = numTimes;
+
+            return View();
         }
     }
 }
